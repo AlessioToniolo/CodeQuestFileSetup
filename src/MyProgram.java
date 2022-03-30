@@ -35,7 +35,6 @@ public class MyProgram {
                     // read the line of text to get the test data
                     inLine = br.readLine();
 
-                    doStuff(inLine);
 
                     System.out.println(inLine);
                 }
@@ -47,41 +46,16 @@ public class MyProgram {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        doStuff("hello");
     }
 
     // TODO: add your code here
 
     public static void doStuff(String inLine) {
+        System.out.println(from(inLine, -2));
     }
 
     // todo: HELPER FUNCTIONS
-
-    /**
-     * Rounds a double to the nearest integer.
-     *
-     * @param d      the double to round
-     * @param places the number of decimal places to round to
-     * @return the rounded double
-     */
-    public static double round(double d, int places) {
-        double multiplier = Math.pow(10, places);
-        return Math.round(d * multiplier) / multiplier;
-    }
-
-    /**
-     * Find the letter at a given index in a string.
-     *
-     * @param s the string to search
-     * @param i the index of the letter to find
-     * @return the letter at the given index
-     */
-    public static String getLetter(String s, int i) {
-        if (i < 0) {
-            return String.valueOf(s.charAt(s.length() + i));
-        } else {
-            return String.valueOf(s.charAt(i));
-        }
-    }
 
     /**
      * Shorthand for System.out.println().
@@ -286,5 +260,93 @@ public class MyProgram {
         return Stream.of(d).mapToDouble(Double::doubleValue).toArray();
     }
 
+
+    //more useful methods
+
+    /**
+     * Returns the a char equivilant of the int array
+     *
+     * @param o the int array
+     * @return the char array
+     */
+    public static char[] intToChar(int[] i){
+        char[] c = new char[i.length];
+        for(int j = 0; j < i.length; j++){
+            c[j] = (char) i[j];
+        }
+        return c;
+    }
+
+    /**
+     * Returns a boolean representing if one int or char array is a subset of another
+     * one method takes an int and another takes a char array using overloading
+     *
+     * @param o the int array
+     * @return boolean 
+     */
+    public static boolean isSubset(int[] a, int[] b) {
+        String as = intToChar(a).toString();
+        String bs = intToChar(b).toString();
+        return as.contains(bs) || bs.contains(as);
+    }
+
+    public static boolean isSubset(char[] a, char[] b) {
+        String as = a.toString();
+        String bs = b.toString();
+        return as.contains(bs) || bs.contains(as);
+    }
+
+    /**
+     * Rounds a double to the nearest integer.
+     *
+     * @param d      the double to round
+     * @param places the number of decimal places to round to
+     * @return the rounded double
+     */
+    public static double round(double d, int places) {
+        double multiplier = Math.pow(10, places);
+        return Math.round(d * multiplier) / multiplier;
+    }
+
+    /**
+     * Find the letter at a given index in a string.
+     *
+     * @param s the string to search
+     * @param i the index of the letter to find
+     * @return the letter at the given index
+     */
+    public static String letterAt(String s, int i) {
+        if(i <0 && i >s.length())
+            return null;
+        else if (i < 0) {
+            return String.valueOf(s.charAt(s.length() + i));
+        } else {
+            return String.valueOf(s.charAt(i));
+        }
+    }
+
+    public static String fromTo(String s, int beg, int end){
+        if(beg <0 && end < 0)
+        {
+            return s.substring(s.length() + beg, s.length() + end);
+        }
+        else if(beg>0 && end >0)
+        {
+            return s.substring(beg, end);
+        }
+        else return null;
+    }
+    public static String from(String s, int beg)
+    {
+        if(beg<0)
+        {
+            return s.substring(s.length() + beg);
+        }
+        else if(beg>0)
+        {
+            return s.substring(beg);
+        }
+        else return null;
+    }
     
 }
