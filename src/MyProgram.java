@@ -3,6 +3,9 @@ import java.io.File;
 import java.io.FileReader;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.*;
+import java.util.stream.*;
+import java.nio.CharBuffer;
 
 // Example for Reading from File
 // T will store number of test cases
@@ -89,6 +92,17 @@ public class MyProgram {
     public static void send(String s) {
         System.out.println(s);
     }
+
+    /**
+     * Even Shorter Shorthand for System.out.println().
+     *
+     * @param s the string to print
+     * @return the string
+     */
+    public static void p(String s) {
+        System.out.println(s);
+    }
+    
 
     /**
      * Converts a string to a double.
@@ -199,4 +213,78 @@ public class MyProgram {
     public static BigInteger toBigInteger(String s, int radix) {
         return new BigInteger(s, radix);
     }
+    /**
+     * Converts an array to List
+     * @param o
+     * @return
+     */
+    
+    public static List<Object> toList(Object o) {
+        return Arrays.asList(o);
+    }
+    /**
+     * Converts a List to array
+     * @param o
+     * @return
+     */
+    public static Object[] toArray(ArrayList<Object> o)
+    {
+        return o.toArray();
+    }
+
+    /**
+     * Converts an int[] to Integer[]
+     * @param o
+     * @return
+     */
+    public static Integer[] boxInt(int[] i){
+        return Arrays.stream(i).boxed().toArray(Integer[]::new);
+    }
+
+    /**
+     * Converts an char[] to Char[]
+     * @param o
+     * @return
+     */
+    public static Character[] boxChar(char[] c){
+        return CharBuffer.wrap(c).chars().mapToObj(i -> (char) i).toArray(Character[]::new);
+    }
+
+    /**
+     * Converts an double[] to Double[]
+     * @param d
+     * @return
+     */
+    public static Double[] boxDouble(double[] d){
+        return Arrays.stream(d).boxed().toArray(Double[]::new);
+    }
+
+        /**
+     * Converts an Integer[] to int[]
+     * @param o
+     * @return
+     */
+    public static int[] unboxInt(Integer[] i){
+        return Arrays.stream(i).mapToInt(Integer::intValue).toArray();
+    }
+
+    /**
+     * Converts an Character[] to char[]
+     * @param o
+     * @return
+     */
+    public static char[] unboxChar(Character[] c){
+        return Arrays.stream(c).map(ch -> ch.toString()).collect(Collectors.joining()).toCharArray();
+    }
+
+    /**
+     * Converts an Double[] to double[]
+     * @param d
+     * @return
+     */
+    public static double[] unboxDouble(Double[] d){
+        return Stream.of(d).mapToDouble(Double::doubleValue).toArray();
+    }
+
+    
 }
